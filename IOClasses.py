@@ -40,8 +40,15 @@ class EmployeeIO:
 
         :return: string
         """
-        choice = str(input("Which option would you like to perform? [1 to 4] - ")).strip()
-        print()  # Add an extra line for looks
+        while(True):
+                try:
+                    choice = str(input("Which option would you like to perform? [1 to 4] - ")).strip()
+                    print()  # Add an extra line for looks
+                    if int(choice) not in (1,2,3,4):
+                        raise Exception('Please select a numeric option between 1 and 4.')
+                    break
+                except:
+                    print("Not a valid selection. Please try again ...")
         return choice
 
     @staticmethod
@@ -50,15 +57,18 @@ class EmployeeIO:
 
         :param list_of_rows: (list) of rows you want to display
         """
-        print("******* The current items employees are: *******")
-        for row in list_of_rows:
-            print(str(row.employee_id)
-                  + "," 
-                  + row.first_name
-                  + "," 
-                  + row.last_name)
-        print("*******************************************")
-        print()  # Add an extra line for looks
+        try:
+            print("******* The current items employees are: *******")
+            for row in list_of_rows:
+                print(str(row.employee_id)
+                      + ","
+                      + row.first_name
+                      + ","
+                      + row.last_name)
+            print("*******************************************")
+            print()  # Add an extra line for looks
+        except:
+            print("No valid data or file not found.")
 
     @staticmethod
     def input_employee_data():
